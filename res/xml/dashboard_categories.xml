@@ -159,6 +159,44 @@
 
     </dashboard-category>
 
+    <!-- CUSTOM -->
+    <dashboard-category
+            android:id="@+id/custom_section"
+            android:key="@string/category_key_custom"
+            android:title="@string/header_category_custom" >
+
+    <!-- Remix Settings -->
+        <dashboard-tile
+                android:id="@+id/remix_main_settings"
+                android:title="@string/remix_settings_title"
+                android:fragment="com.android.settings.darkobas.RemixMainSettings"
+                android:icon="@drawable/ic_remix_icon"
+                />
+
+        <!-- SuperSU -->
+        <dashboard-tile
+                android:id="@+id/supersu_settings"
+                android:icon="@drawable/ic_settings_supersu_tile"
+                android:title="@string/supersu_title">
+                <intent
+                    android:action="android.intent.action.MAIN"
+                    android:targetPackage="eu.chainfire.supersu"
+                    android:targetClass="eu.chainfire.supersu.MainActivity" />
+        </dashboard-tile>
+
+        <!-- Layers -->
+        <dashboard-tile
+                android:id="@+id/bitsyko_layers"
+                android:icon="@drawable/ic_bitsyko_layers"
+                android:title="@string/bitsyko_layers">
+                <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.lovejoy777.rroandlayersmanager"
+                android:targetClass="com.lovejoy777.rroandlayersmanager.menu" />
+        </dashboard-tile>
+
+    </dashboard-category>
+
     <!-- PERSONAL -->
     <dashboard-category
             android:id="@+id/personal_section"

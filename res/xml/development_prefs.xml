@@ -16,10 +16,10 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/development_settings_title">
-    <com.android.settings.BugreportPreference
+    <!--<com.android.settings.BugreportPreference
             android:key="bugreport"
             android:title="@*android:string/bugreport_title"
-            android:dialogTitle="@*android:string/bugreport_title" />
+            android:dialogTitle="@*android:string/bugreport_title" />-->
 
     <PreferenceScreen
             android:key="local_backup_password"
@@ -31,6 +31,12 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.SetFullBackupPassword" />
     </PreferenceScreen>
+
+    <SwitchPreference
+        android:key="advanced_reboot"
+        android:title="@string/advanced_reboot_title"
+        android:summary="@string/advanced_reboot_summary"
+        android:persistent="false"/>
 
     <SwitchPreference
         android:key="keep_screen_on"
@@ -53,12 +59,25 @@
         android:key="oem_unlock_enable"
         android:title="@string/oem_unlock_enable"
         android:summary="@string/oem_unlock_enable_summary"/>
+    
+     <com.android.settings.DropDownPreference
+        android:key="night_mode"
+        android:title="@string/night_mode_title"
+        android:summary="@string/night_mode_summary"
+        android:entries="@array/night_mode_entries"
+        android:entryValues="@array/night_mode_values" />
 
     <PreferenceScreen
         android:key="running_apps"
         android:title="@string/runningservices_settings_title"
         android:summary="@string/runningservices_settings_summary"
         android:fragment="com.android.settings.applications.RunningServices" />
+
+    <com.android.settings.ColorModePreference
+        android:key="color_mode"
+        android:title="@string/picture_color_mode"
+        android:summary="@string/picture_color_mode_desc"
+        android:persistent="false" />
 
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
@@ -75,11 +94,6 @@
             android:key="enable_terminal"
             android:title="@string/enable_terminal_title"
             android:summary="@string/enable_terminal_summary" />
-
-        <SwitchPreference
-            android:key="bugreport_in_power"
-            android:title="@string/bugreport_in_power"
-            android:summary="@string/bugreport_in_power_summary"/>
 
         <PreferenceScreen android:key="mock_location_app"
             android:title="@string/mock_location_app" />

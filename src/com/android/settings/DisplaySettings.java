@@ -15,13 +15,15 @@
  */
 
 package com.android.settings;
-
 import com.android.internal.logging.MetricsLogger;
+import android.preference.CheckBoxPreference;
 import com.android.internal.view.RotationPolicy;
 import com.android.settings.DropDownPreference.Callback;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
+import static android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED;
+import static android.provider.Settings.Secure.CAMERA_GESTURE_DISABLED;
 import static android.provider.Settings.Secure.DOUBLE_TAP_TO_WAKE;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.WAKE_GESTURE_ENABLED;
@@ -42,7 +44,9 @@ import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.preference.ListPreference;
@@ -54,6 +58,8 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.android.settings.cyanogenmod.DisplayRotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,10 +80,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_AUTO_BRIGHTNESS = "auto_brightness";
     private static final String KEY_AUTO_ROTATE = "auto_rotate";
     private static final String KEY_NIGHT_MODE = "night_mode";
+    private static final String KEY_CAMERA_GESTURE = "camera_gesture";
+    private static final String KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE
+            = "camera_double_tap_power_gesture";
+    private static final String KEY_DISPLAY_ROTATION = "display_rotation";
 
     private static final int DLG_GLOBAL_CHANGE_WARNING = 1;
 
-    private WarnedListPreference mFontSizePref;
+    private PreferenceScreen mDisplayRotationPreference;
+    private FontDialogPreference mFontSizePref;
 
     private final Configuration mCurConfig = new Configuration();
 
@@ -88,6 +99,24 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mDozePreference;
     private SwitchPreference mTapToWakePreference;
     private SwitchPreference mAutoBrightnessPreference;
+    private SwitchPreference mCameraGesturePreference;
+    private SwitchPreference mCameraDoubleTapPowerGesturePreference;
+
+    private ContentObserver mAccelerometerRotationObserver =
+            new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            updateDisplayRotationPreferenceDescription();
+        }
+    };
+
+    private final RotationPolicy.RotationPolicyListener mRotationPolicyListener =
+            new RotationPolicy.RotationPolicyListener() {
+        @Override
+        public void onChange() {
+            updateDisplayRotationPreferenceDescription();
+        }
+    };
 
     @Override
     protected int getMetricsCategory() {
@@ -101,6 +130,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         final ContentResolver resolver = activity.getContentResolver();
 
         addPreferencesFromResource(R.xml.display_settings);
+
+        mDisplayRotationPreference = (PreferenceScreen) findPreference(KEY_DISPLAY_ROTATION);
 
         mScreenSaverPreference = findPreference(KEY_SCREEN_SAVER);
         if (mScreenSaverPreference != null
@@ -116,8 +147,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(currentTimeout);
+        updateDisplayRotationPreferenceDescription();
 
-        mFontSizePref = (WarnedListPreference) findPreference(KEY_FONT_SIZE);
+        mFontSizePref = (FontDialogPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
         mFontSizePref.setOnPreferenceClickListener(this);
 
@@ -147,6 +179,21 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mTapToWakePreference.setOnPreferenceChangeListener(this);
         } else {
             removePreference(KEY_TAP_TO_WAKE);
+        }
+
+        if (isCameraGestureAvailable(getResources())) {
+            mCameraGesturePreference = (SwitchPreference) findPreference(KEY_CAMERA_GESTURE);
+            mCameraGesturePreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_CAMERA_GESTURE);
+        }
+
+        if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
+            mCameraDoubleTapPowerGesturePreference
+                    = (SwitchPreference) findPreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
+            mCameraDoubleTapPowerGesturePreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
         }
 
         if (RotationPolicy.isRotationLockToggleVisible(activity)) {
@@ -187,6 +234,21 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             removePreference(KEY_AUTO_ROTATE);
         }
 
+        if (isCameraGestureAvailable(getResources())) {
+            mCameraGesturePreference = (SwitchPreference) findPreference(KEY_CAMERA_GESTURE);
+            mCameraGesturePreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_CAMERA_GESTURE);
+        }
+
+        if (isCameraDoubleTapPowerGestureAvailable(getResources())) {
+            mCameraDoubleTapPowerGesturePreference
+                    = (SwitchPreference) findPreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
+            mCameraDoubleTapPowerGesturePreference.setOnPreferenceChangeListener(this);
+        } else {
+            removePreference(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
+        }
+
         mNightModePreference = (ListPreference) findPreference(KEY_NIGHT_MODE);
         if (mNightModePreference != null) {
             final UiModeManager uiManager = (UiModeManager) getSystemService(
@@ -222,6 +284,66 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private static boolean isAutomaticBrightnessAvailable(Resources res) {
         return res.getBoolean(com.android.internal.R.bool.config_automatic_brightness_available);
+    }
+
+    private void updateDisplayRotationPreferenceDescription() {
+        if (mDisplayRotationPreference == null) {
+            // The preference was removed, do nothing
+            return;
+        }
+
+        // We have a preference, lets update the summary
+        boolean rotationEnabled = Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION, 0) != 0;
+
+        if (!rotationEnabled) {
+            mDisplayRotationPreference.setSummary(R.string.display_rotation_disabled);
+            return;
+        }
+
+        StringBuilder summary = new StringBuilder();
+        int mode = Settings.System.getInt(getContentResolver(),
+                Settings.System.ACCELEROMETER_ROTATION_ANGLES,
+                DisplayRotation.ROTATION_0_MODE
+                | DisplayRotation.ROTATION_90_MODE
+                | DisplayRotation.ROTATION_270_MODE);
+        ArrayList<String> rotationList = new ArrayList<String>();
+        String delim = "";
+
+        if ((mode & DisplayRotation.ROTATION_0_MODE) != 0) {
+            rotationList.add("0");
+        }
+        if ((mode & DisplayRotation.ROTATION_90_MODE) != 0) {
+            rotationList.add("90");
+        }
+        if ((mode & DisplayRotation.ROTATION_180_MODE) != 0) {
+            rotationList.add("180");
+        }
+        if ((mode & DisplayRotation.ROTATION_270_MODE) != 0) {
+            rotationList.add("270");
+        }
+        for (int i = 0; i < rotationList.size(); i++) {
+            summary.append(delim).append(rotationList.get(i));
+            if ((rotationList.size() - i) > 2) {
+                delim = ", ";
+            } else {
+                delim = " & ";
+            }
+        }
+        summary.append(" " + getString(R.string.display_rotation_unit));
+        mDisplayRotationPreference.setSummary(summary);
+    }
+
+    private static boolean isCameraGestureAvailable(Resources res) {
+        boolean configSet = res.getInteger(
+                com.android.internal.R.integer.config_cameraLaunchGestureSensorType) != -1;
+        return configSet &&
+                !SystemProperties.getBoolean("gesture.disable_camera_launch", false);
+    }
+
+    private static boolean isCameraDoubleTapPowerGestureAvailable(Resources res) {
+        return res.getBoolean(
+                com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled);
     }
 
     private void updateTimeoutPreferenceDescription(long currentTimeout) {
@@ -291,41 +413,21 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         screenTimeoutPreference.setEnabled(revisedEntries.size() > 0);
     }
 
-    int floatToIndex(float val) {
-        String[] indices = getResources().getStringArray(R.array.entryvalues_font_size);
-        float lastVal = Float.parseFloat(indices[0]);
-        for (int i=1; i<indices.length; i++) {
-            float thisVal = Float.parseFloat(indices[i]);
-            if (val < (lastVal + (thisVal-lastVal)*.5f)) {
-                return i-1;
-            }
-            lastVal = thisVal;
-        }
-        return indices.length-1;
-    }
-
-    public void readFontSizePreference(ListPreference pref) {
-        try {
-            mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
-        } catch (RemoteException e) {
-            Log.w(TAG, "Unable to retrieve font size");
-        }
-
-        // mark the appropriate item in the preferences list
-        int index = floatToIndex(mCurConfig.fontScale);
-        pref.setValueIndex(index);
-
-        // report the current size in the summary text
-        final Resources res = getResources();
-        String[] fontSizeNames = res.getStringArray(R.array.entries_font_size);
-        pref.setSummary(String.format(res.getString(R.string.summary_font_size),
-                fontSizeNames[index]));
-    }
-
     @Override
     public void onResume() {
         super.onResume();
         updateState();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        RotationPolicy.unregisterRotationPolicyListener(getActivity(),
+                mRotationPolicyListener);
+
+        // Display rotation observer
+        getContentResolver().unregisterContentObserver(mAccelerometerRotationObserver);
     }
 
     @Override
@@ -370,6 +472,19 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             int value = Settings.Secure.getInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, 0);
             mTapToWakePreference.setChecked(value != 0);
         }
+
+        // Update camera gesture #1 if it is available.
+        if (mCameraGesturePreference != null) {
+            int value = Settings.Secure.getInt(getContentResolver(), CAMERA_GESTURE_DISABLED, 0);
+            mCameraGesturePreference.setChecked(value == 0);
+        }
+
+        // Update camera gesture #2 if it is available.
+        if (mCameraDoubleTapPowerGesturePreference != null) {
+            int value = Settings.Secure.getInt(
+                    getContentResolver(), CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
+            mCameraDoubleTapPowerGesturePreference.setChecked(value == 0);
+        }
     }
 
     private void updateScreenSaverSummary() {
@@ -377,6 +492,22 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             mScreenSaverPreference.setSummary(
                     DreamSettings.getSummaryTextWithDreamName(getActivity()));
         }
+    }
+
+    /**
+     * Reads the current font size and sets the value in the summary text
+     */
+    public void readFontSizePreference(Preference pref) {
+        try {
+            mCurConfig.updateFrom(ActivityManagerNative.getDefault().getConfiguration());
+        } catch (RemoteException e) {
+            Log.w(TAG, "Unable to retrieve font size");
+        }
+
+        // report the current size in the summary text
+        final Resources res = getResources();
+        String fontDesc = FontDialogPreference.getFontSizeDescription(res, mCurConfig.fontScale);
+        pref.setSummary(getString(R.string.summary_font_size, fontDesc));
     }
 
     public void writeFontSizePreference(Object objValue) {
@@ -424,6 +555,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         if (preference == mTapToWakePreference) {
             boolean value = (Boolean) objValue;
             Settings.Secure.putInt(getContentResolver(), DOUBLE_TAP_TO_WAKE, value ? 1 : 0);
+        }
+        if (preference == mCameraGesturePreference) {
+            boolean value = (Boolean) objValue;
+            Settings.Secure.putInt(getContentResolver(), CAMERA_GESTURE_DISABLED,
+                    value ? 0 : 1 /* Backwards because setting is for disabling */);
+        }
+        if (preference == mCameraDoubleTapPowerGesturePreference) {
+            boolean value = (Boolean) objValue;
+            Settings.Secure.putInt(getContentResolver(), CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
+                    value ? 0 : 1 /* Backwards because setting is for disabling */);
         }
         if (preference == mNightModePreference) {
             try {
@@ -492,6 +633,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     }
                     if (!isTapToWakeAvailable(context.getResources())) {
                         result.add(KEY_TAP_TO_WAKE);
+                    }
+                    if (!isCameraGestureAvailable(context.getResources())) {
+                        result.add(KEY_CAMERA_GESTURE);
+                    }
+                    if (!isCameraDoubleTapPowerGestureAvailable(context.getResources())) {
+                        result.add(KEY_CAMERA_DOUBLE_TAP_POWER_GESTURE);
                     }
                     return result;
                 }

@@ -33,12 +33,14 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Telephony;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
@@ -112,6 +114,9 @@ public class ApnSettings extends SettingsPreferenceFragment implements
 
     private boolean mUnavailable;
 
+    private boolean mHideImsApn;
+    private boolean mAllowAddingApns;
+
     private final BroadcastReceiver mMobileStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -163,6 +168,12 @@ public class ApnSettings extends SettingsPreferenceFragment implements
 
         mSubscriptionInfo = SubscriptionManager.from(activity).getActiveSubscriptionInfo(subId);
         mUiccController = UiccController.getInstance();
+
+        CarrierConfigManager configManager = (CarrierConfigManager)
+                getSystemService(Context.CARRIER_CONFIG_SERVICE);
+        PersistableBundle b = configManager.getConfig();
+        mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
+        mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
     }
 
     @Override
@@ -228,12 +239,15 @@ public class ApnSettings extends SettingsPreferenceFragment implements
         final String mccmnc = mSubscriptionInfo == null ? ""
             : tm.getIccOperatorNumericForData(mSubscriptionInfo.getSubscriptionId());
         Log.d(TAG, "mccmnc = " + mccmnc);
-        final String where = "numeric=\""
-            + mccmnc
-            + "\" AND NOT (type='ia' AND (apn=\"\" OR apn IS NULL))";
+        StringBuilder where = new StringBuilder("numeric=\"" + mccmnc +
+                "\" AND NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND user_visible!=0");
+
+        if (mHideImsApn) {
+            where.append(" AND NOT (type='ims')");
+        }
 
         Cursor cursor = getContentResolver().query(Telephony.Carriers.CONTENT_URI, new String[] {
-                "_id", "name", "apn", "type", "mvno_type", "mvno_match_data", "read_only"}, where,
+                "_id", "name", "apn", "type", "mvno_type", "mvno_match_data", "read_only"}, where.toString(),
                 null, Telephony.Carriers.DEFAULT_SORT_ORDER);
 
         if (cursor != null) {
@@ -329,10 +343,12 @@ public class ApnSettings extends SettingsPreferenceFragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (!mUnavailable) {
-            menu.add(0, MENU_NEW, 0,
-                    getResources().getString(R.string.menu_new))
-                    .setIcon(android.R.drawable.ic_menu_add)
-                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            if (mAllowAddingApns) {
+                menu.add(0, MENU_NEW, 0,
+                        getResources().getString(R.string.menu_new))
+                        .setIcon(android.R.drawable.ic_menu_add)
+                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            }
             menu.add(0, MENU_RESTORE, 0,
                     getResources().getString(R.string.menu_restore))
                     .setIcon(android.R.drawable.ic_menu_upload);

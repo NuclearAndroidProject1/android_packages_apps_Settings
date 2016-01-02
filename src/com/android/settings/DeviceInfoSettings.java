@@ -65,6 +65,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String FILENAME_PROC_VERSION = "/proc/version";
     private static final String FILENAME_MSV = "/sys/board_properties/soc/msv";
 
+    private static final String KEY_MANUAL = "manual";
     private static final String KEY_REGULATORY_INFO = "regulatory_info";
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
@@ -81,6 +82,8 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";
     private static final String KEY_DEVICE_FEEDBACK = "device_feedback";
     private static final String KEY_SAFETY_LEGAL = "safetylegal";
+    private static final String KEY_PAR_VERSION = "par_version";
+    private static final String KEY_PAR_BRANCH = "par_branch";
 
     static final int TAPS_TO_BE_A_DEVELOPER = 7;
 
@@ -128,6 +131,10 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         setStringSummary(KEY_BUILD_NUMBER, Build.DISPLAY);
         findPreference(KEY_BUILD_NUMBER).setEnabled(true);
         findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
+	setValueSummary(KEY_PAR_VERSION, "ro.par.version");
+	setValueSummary(KEY_PAR_BRANCH, "ro.par.branch");
+	findPreference(KEY_PAR_VERSION).setEnabled(true);
+	findPreference(KEY_PAR_BRANCH).setEnabled(true);
 
         if (!SELinux.isSELinuxEnabled()) {
             String status = getResources().getString(R.string.selinux_status_disabled);
@@ -180,7 +187,9 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
         removePreferenceIfBoolFalse(KEY_UPDATE_SETTING,
                 R.bool.config_additional_system_update_setting_enable);
 
-        // Remove regulatory information if none present or config_show_regulatory_info is disabled
+        // Remove manual entry if none present.
+        removePreferenceIfBoolFalse(KEY_MANUAL, R.bool.config_show_manual);
+
         final Intent intent = new Intent(Settings.ACTION_SHOW_REGULATORY_INFO);
         if (getPackageManager().queryIntentActivities(intent, 0).isEmpty()
                 || !getResources().getBoolean(R.bool.config_show_regulatory_info)) {
@@ -234,6 +243,10 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                     getActivity().getSharedPreferences(DevelopmentSettings.PREF_FILE,
                             Context.MODE_PRIVATE).edit().putBoolean(
                                     DevelopmentSettings.PREF_SHOW, true).apply();
+
+                    Settings.Secure.putInt(getActivity().getContentResolver(),
+                            Settings.Secure.DEVELOPMENT_SETTINGS_ENABLED, 1);
+
                     if (mDevHitToast != null) {
                         mDevHitToast.cancel();
                     }
