@@ -72,6 +72,42 @@
 
     </dashboard-category>
 
+        <!-- PERSONALIZATION -->
+    <dashboard-category
+            android:id="@+id/personalization_section"
+            android:title="@string/header_category_personalization" >
+        <!-- NuclearMod-->
+        <dashboard-tile
+                android:id="@+id/main_settings"
+                android:title="@string/nuclear_settings_title"
+                android:fragment="com.android.settings.nuclear.MainSettings"
+                android:icon="@drawable/ic_nuclear"
+                />  
+                
+        <!-- SuperSU -->
+        <dashboard-tile
+                android:id="@+id/supersu_settings"
+                android:icon="@drawable/ic_settings_supersu_tile"
+                android:title="@string/supersu_title">
+                <intent
+                    android:action="android.intent.action.MAIN"
+                    android:targetPackage="eu.chainfire.supersu"
+                    android:targetClass="eu.chainfire.supersu.MainActivity" />
+        </dashboard-tile>
+
+        <!-- Layers -->
+        <dashboard-tile
+                android:id="@+id/bitsyko_layers"
+                android:icon="@drawable/ic_bitsyko_layers"
+                android:title="@string/bitsyko_layers">
+                <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.lovejoy777.rroandlayersmanager"
+                android:targetClass="com.lovejoy777.rroandlayersmanager.menu" />
+        </dashboard-tile>
+
+    </dashboard-category>
+
     <!-- DEVICE -->
     <dashboard-category
             android:id="@+id/device_section"
@@ -159,44 +195,6 @@
 
     </dashboard-category>
 
-    <!-- CUSTOM -->
-    <dashboard-category
-            android:id="@+id/custom_section"
-            android:key="@string/category_key_custom"
-            android:title="@string/header_category_custom" >
-
-    <!-- Remix Settings -->
-        <dashboard-tile
-                android:id="@+id/remix_main_settings"
-                android:title="@string/remix_settings_title"
-                android:fragment="com.android.settings.darkobas.RemixMainSettings"
-                android:icon="@drawable/ic_remix_icon"
-                />
-
-        <!-- SuperSU -->
-        <dashboard-tile
-                android:id="@+id/supersu_settings"
-                android:icon="@drawable/ic_settings_supersu_tile"
-                android:title="@string/supersu_title">
-                <intent
-                    android:action="android.intent.action.MAIN"
-                    android:targetPackage="eu.chainfire.supersu"
-                    android:targetClass="eu.chainfire.supersu.MainActivity" />
-        </dashboard-tile>
-
-        <!-- Layers -->
-        <dashboard-tile
-                android:id="@+id/bitsyko_layers"
-                android:icon="@drawable/ic_bitsyko_layers"
-                android:title="@string/bitsyko_layers">
-                <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.lovejoy777.rroandlayersmanager"
-                android:targetClass="com.lovejoy777.rroandlayersmanager.menu" />
-        </dashboard-tile>
-
-    </dashboard-category>
-
     <!-- PERSONAL -->
     <dashboard-category
             android:id="@+id/personal_section"
@@ -253,13 +251,7 @@
         android:id="@+id/system_section"
         android:key="@string/category_key_system"
         android:title="@string/header_category_system" >
-    <dashboard-tile
-                android:id="@+id/qtifeedback_settings"
-                android:title="@string/qtifeedback_settings_title"
-                android:summary="@string/qtifeedback_settings_subtitle"
-                android:icon="@drawable/ic_settings_qti_feedback">
-        <intent android:action="com.qti.smq.snapdragonSettings" />
-        </dashboard-tile>
+
     <!-- Date & Time -->
         <dashboard-tile
                 android:id="@+id/date_time_settings"

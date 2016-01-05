@@ -53,7 +53,7 @@ import com.android.settings.users.UserSettings;
 import com.android.settings.wifi.AdvancedWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
-import com.android.settings.darkobas.RemixMainSettings;
+import com.android.settings.nuclear.MainSettings;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -304,12 +304,12 @@ public final class SearchIndexableResources {
                         WifiCallingSettings.class.getName(),
                         R.drawable.ic_settings_wireless));
 
-        sResMap.put(RemixMainSettings.class.getName(),
+        sResMap.put(MainSettings.class.getName(),
                 new SearchIndexableResource(
-                        Ranking.getRankForClassName(RemixMainSettings.class.getName()),
-                        R.xml.remix_main_settings,
-                        RemixMainSettings.class.getName(),
-                        R.drawable.ic_remix_icon));
+                        Ranking.getRankForClassName(MainSettings.class.getName()),
+                        R.xml.nuclear_main_settings,
+                        MainSettings.class.getName(),
+                        R.drawable.ic_nuclear));
     }
 
     private SearchIndexableResources() {

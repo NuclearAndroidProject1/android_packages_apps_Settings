@@ -125,7 +125,7 @@ import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
-import com.android.settings.darkobas.RemixMainSettings;
+import com.android.settings.nuclear.MainSettings;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -282,7 +282,7 @@ public class SettingsActivity extends Activity
             R.id.print_settings,
             R.id.nfc_payment_settings,
             R.id.home_settings,
-            R.id.remix_main_settings,
+            R.id.main_settings,
             R.id.dashboard
     };
 
@@ -359,7 +359,7 @@ public class SettingsActivity extends Activity
             ProcessStatsSummary.class.getName(),
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
-            RemixMainSettings.class.getName()
+            MainSettings.class.getName()
     };
 
 

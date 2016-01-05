@@ -55,7 +55,7 @@
 
     </LinearLayout>
 
-    <com.android.settings.darkobas.cp.ColorPickerView
+    <com.android.settings.nuclear.cp.ColorPickerView
         android:id="@+id/color_picker_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,42 +70,42 @@
         android:layout_marginRight="7dp"
         android:layout_marginTop="2dp">
 
-        <com.android.settings.darkobas.cp.ColorPickerPanelView
+        <com.android.settings.nuclear.cp.ColorPickerPanelView
             android:id="@+id/white_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_marginRight="6dp"
             android:layout_weight="0.5" />
 
-        <com.android.settings.darkobas.cp.ColorPickerPanelView
+        <com.android.settings.nuclear.cp.ColorPickerPanelView
             android:id="@+id/black_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_marginRight="6dp"
             android:layout_weight="0.5" />
 
-        <com.android.settings.darkobas.cp.ColorPickerPanelView
+        <com.android.settings.nuclear.cp.ColorPickerPanelView
             android:id="@+id/cyan_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_marginRight="6dp"
             android:layout_weight="0.5" />
 
-        <com.android.settings.darkobas.cp.ColorPickerPanelView
+        <com.android.settings.nuclear.cp.ColorPickerPanelView
             android:id="@+id/red_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_marginRight="6dp"
             android:layout_weight="0.5" />
 
-        <com.android.settings.darkobas.cp.ColorPickerPanelView
+        <com.android.settings.nuclear.cp.ColorPickerPanelView
             android:id="@+id/green_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_marginRight="6dp"
             android:layout_weight="0.5" />
 
-        <com.android.settings.darkobas.cp.ColorPickerPanelView
+        <com.android.settings.nuclear.cp.ColorPickerPanelView
             android:id="@+id/yellow_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
         android:layout_marginBottom="10dp">
 
 
-        <com.android.settings.darkobas.cp.ColorPickerPanelView
+        <com.android.settings.nuclear.cp.ColorPickerPanelView
             android:id="@+id/old_color_panel"
             android:layout_width="0px"
             android:layout_height="fill_parent"
@@ -145,7 +145,7 @@
             android:layout_marginRight="10dp" />
 
 
-        <com.android.settings.darkobas.cp.ColorPickerPanelView
+        <com.android.settings.nuclear.cp.ColorPickerPanelView
             android:id="@+id/new_color_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"

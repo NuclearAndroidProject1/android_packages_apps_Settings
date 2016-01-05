@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    
+    <string name="settings_reset_button">Reset</string>
+    <string name="profile_reset_title">Reset</string>
+
+    <!-- Nuclear Menu -->
+    <string name="header_category_personalization">Personalization</string>
+    <!--Nuclear-->
+    <string name="nuclear_cat_title">Performance</string>
+    <string name="nuclear_settings_title">Nuclear Settings</string>
+    <string name="nuclear_cat_privacy_title">Privacy</string>
+    <string name="nuclear_perso_title">Personalization</string>
+
+    <!-- Navigation settings -->
+    <string name="navigation_settings_options_title">Navigation options</string>
+    <string name="navigation_settings_title">Navigation</string>
+
+    <!-- nuclearbloq -->
+    <string name="nuclear_bloq_title">LockScreen Settings</string>
+
+    <!-- nuclearmisc -->
+    <string name="misc_category_title">Miscellaneous</string>
+
+    <string name="app_security_title">App security</string>
+
+    <string name="interface_settings_title">Interface</string>
+    <string name="status_bar_title">Status Bar</string>
+
+    <string name="recent_title">Recent Settings</string>
+
+    <string name="other_settings_title">Other Settings</string>
+
+    <string name="gesture_title">Gestures</string>
+    <string name="led_title">Led Settings</string>
+</resources>

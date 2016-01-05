@@ -63,12 +63,12 @@
         android:key="weather_cat_colors"
         android:title="@string/colors_title">
 
-         <com.android.settings.darkobas.cp.ColorPickerPreference
+         <com.android.settings.nuclear.cp.ColorPickerPreference
             android:key="weather_text_color"
             android:title="@string/text_title"
             android:defaultValue="0xffffffff" />
 
-         <com.android.settings.darkobas.cp.ColorPickerPreference
+         <com.android.settings.nuclear.cp.ColorPickerPreference
             android:key="weather_icon_color"
             android:title="@string/icons_title"
             android:defaultValue="0xffffffff" />
