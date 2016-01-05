@@ -124,5 +124,8 @@
         <attr name="max" format="float" />
         <attr name="defaultValue" format="float" />
         <attr name="digits" format="integer" />
+        <attr name="netMin" format="integer" />
+    	<attr name="netUnitsLeft" format="string" />
+    	<attr name="netUnitsRight" format="string" />
     </declare-styleable>
 </resources>
