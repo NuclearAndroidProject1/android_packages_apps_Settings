@@ -22,11 +22,13 @@ import android.app.IActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.app.UiModeManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
@@ -50,6 +52,7 @@ import android.view.View;
 
 import java.util.List;
 import java.util.ArrayList;
+import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import android.provider.Settings.SettingNotFoundException;
@@ -58,14 +61,16 @@ import com.android.internal.logging.MetricsLogger;
 public class InterfaceSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-private static final String TAG = "RemixScreenSettings";
+	private static final String TAG = "InterfaceSettings";
     
+    private static final String KEY_NIGHT_MODE = "night_mode";
     private static final int DIALOG_DENSITY = 0;
     private static final int DIALOG_DENSITY_WARNING = 1;
 
     private static final String KEY_LCD_DENSITY = "lcd_density";
 
     private ListPreference mLcdDensityPreference;
+    private DropDownPreference mNightModePreference;
 
     protected Context mContext;
 
@@ -112,6 +117,27 @@ private static final String TAG = "RemixScreenSettings";
             mLcdDensityPreference.setOnPreferenceChangeListener(this);
             updateLcdDensityPreferenceDescription(currentDensity);
         }
+
+        mNightModePreference = (DropDownPreference) findPreference(KEY_NIGHT_MODE);
+        final UiModeManager uiManager = (UiModeManager) getSystemService(
+                Context.UI_MODE_SERVICE);
+        final int currentNightMode = uiManager.getNightMode();
+        mNightModePreference.setSelectedValue(String.valueOf(currentNightMode));
+        mNightModePreference.setCallback(new DropDownPreference.Callback() {
+            @Override
+            public boolean onItemSelected(int pos, Object newValue) {
+                try {
+                    final int value = Integer.parseInt((String) newValue);
+                    final UiModeManager uiManager = (UiModeManager) getSystemService(
+                            Context.UI_MODE_SERVICE);
+                    uiManager.setNightMode(value);
+                    return true;
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "could not persist night mode setting", e);
+                    return false;
+                }
+            }
+        });
 
     }
 

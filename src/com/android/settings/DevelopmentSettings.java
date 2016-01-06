@@ -172,7 +172,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
-    private static final String KEY_NIGHT_MODE = "night_mode";
+   // private static final String KEY_NIGHT_MODE = "night_mode";
 
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
@@ -254,7 +254,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private SwitchPreference mShowAllANRs;
 
-    private DropDownPreference mNightModePreference;
+    //private DropDownPreference mNightModePreference;
 
     private ColorModePreference mColorModePreference;
     private SwitchPreference mAdvancedReboot;
@@ -413,7 +413,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             removePreferenceForProduction(hdcpChecking);
         }
 
-        mNightModePreference = (DropDownPreference) findPreference(KEY_NIGHT_MODE);
+/*        mNightModePreference = (DropDownPreference) findPreference(KEY_NIGHT_MODE);
         final UiModeManager uiManager = (UiModeManager) getSystemService(
                 Context.UI_MODE_SERVICE);
         final int currentNightMode = uiManager.getNightMode();
@@ -432,7 +432,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                     return false;
                 }
             }
-        });
+        });*/
 
         // make sure we dont leave an unremovable bugreport in power menu
         final ContentResolver cr = getActivity().getContentResolver();

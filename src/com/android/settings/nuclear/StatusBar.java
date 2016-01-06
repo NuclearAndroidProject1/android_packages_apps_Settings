@@ -2,11 +2,14 @@ package com.android.settings.nuclear;
 
 import android.content.ContentResolver;
 import android.content.res.Resources;
+import android.content.DialogInterface;
+import android.app.AlertDialog;
 import android.app.IActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Spannable;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
@@ -31,14 +34,16 @@ import com.android.settings.Utils;
 import java.util.Locale;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 
 import java.util.List;
 import java.util.ArrayList;
 import com.android.settings.R;
+import com.android.settings.widget.SeekBarPreferenceCham;
 import com.android.settings.SettingsPreferenceFragment;
 import android.provider.Settings.SettingNotFoundException;
 import com.android.internal.logging.MetricsLogger;
-
+import com.android.settings.nuclear.cp.ColorPickerPreference;
 public class StatusBar extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "StatusBar";
@@ -48,11 +53,19 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
     private static final String DAYLIGHT_HEADER_PACK = "daylight_header_pack";
     private static final String DEFAULT_HEADER_PACKAGE = "com.android.systemui";
     private static final String PRE_QUICK_PULLDOWN = "quick_pulldown";
+    private static final String KEY_STATUS_BAR_GREETING = "status_bar_greeting";
+    private static final String KEY_STATUS_BAR_GREETING_TIMEOUT = "status_bar_greeting_timeout";
+    private static final String KEY_LOGO_COLOR = "status_bar_logo_color";
 
     private SwitchPreference mStatusBarBrightnessControl;
     private ListPreference mDaylightHeaderPack;
     private CheckBoxPreference mCustomHeaderImage;
     private ListPreference mQuickPulldown;
+    private SwitchPreference mStatusBarGreeting;
+    private SeekBarPreferenceCham mStatusBarGreetingTimeout;
+    private ColorPickerPreference mLogoColor;
+
+    private String mCustomGreetingText = "";
 
 	protected Context mContext;
 
@@ -118,6 +131,31 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
         mDaylightHeaderPack.setSummary(mDaylightHeaderPack.getEntry());
         mDaylightHeaderPack.setOnPreferenceChangeListener(this);
         mDaylightHeaderPack.setEnabled(customHeaderImage);
+   		
+   		// logo color
+        mLogoColor =
+            (ColorPickerPreference) prefSet.findPreference(KEY_LOGO_COLOR);
+        mLogoColor.setOnPreferenceChangeListener(this);
+        int intColor = Settings.System.getInt(getContentResolver(),
+               Settings.System.STATUS_BAR_LOGO_COLOR, 0xffffffff);
+        String hexColor = String.format("#%08x", (0xffffffff & intColor));
+            mLogoColor.setSummary(hexColor);
+            mLogoColor.setNewPreviewColor(intColor);
+
+        // Greeting
+        mStatusBarGreeting = (SwitchPreference) prefSet.findPreference(KEY_STATUS_BAR_GREETING);
+        mCustomGreetingText = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.STATUS_BAR_GREETING);
+        boolean greeting = mCustomGreetingText != null && !TextUtils.isEmpty(mCustomGreetingText);
+        mStatusBarGreeting.setChecked(greeting);               
+
+        mStatusBarGreetingTimeout =
+                (SeekBarPreferenceCham) prefSet.findPreference(KEY_STATUS_BAR_GREETING_TIMEOUT);
+        int statusBarGreetingTimeout = Settings.System.getInt(getContentResolver(),
+                Settings.System.STATUS_BAR_GREETING_TIMEOUT, 400);
+        mStatusBarGreetingTimeout.setValue(statusBarGreetingTimeout / 1);
+        mStatusBarGreetingTimeout.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
@@ -153,6 +191,19 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
             Settings.System.putInt(getContentResolver(), STATUS_BAR_BRIGHTNESS_CONTROL,
                     value ? 1 : 0);
             return true;
+        } else if (preference == mStatusBarGreetingTimeout) {
+            int timeout = (Integer) objValue;
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STATUS_BAR_GREETING_TIMEOUT, timeout * 1);
+            return true;
+        } else if (preference == mLogoColor) {
+            String hex = ColorPickerPreference.convertToARGB(
+                    Integer.valueOf(String.valueOf(objValue)));
+            preference.setSummary(hex);
+            int intHex = ColorPickerPreference.convertToColorInt(hex);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.STATUS_BAR_LOGO_COLOR, intHex);
+            return true;  
         } else if (preference == mDaylightHeaderPack) {
             String value = (String) objValue;
             Settings.System.putString(getContentResolver(),
@@ -171,8 +222,44 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
                     Settings.System.STATUS_BAR_CUSTOM_HEADER, value ? 1 : 0);
             mDaylightHeaderPack.setEnabled(value);
             return true;
-        }
+        } else if (preference == mStatusBarGreeting) {
+           boolean enabled = mStatusBarGreeting.isChecked();
+           if (enabled) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+                alert.setTitle(R.string.status_bar_greeting_title);
+                alert.setMessage(R.string.status_bar_greeting_dialog);
+
+                // Set an EditText view to get user input
+                final EditText input = new EditText(getActivity());
+                input.setText(mCustomGreetingText != null ? mCustomGreetingText :
+                        getResources().getString(R.string.status_bar_greeting_main));
+                alert.setView(input);
+                alert.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String value = ((Spannable) input.getText()).toString();
+                        Settings.System.putString(getActivity().getContentResolver(),
+                               Settings.System.STATUS_BAR_GREETING, value);
+                        updateCheckState(value);
+                    }
+                });
+                alert.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                   }
+                });
+
+                alert.show();
+            } else {
+                Settings.System.putString(getActivity().getContentResolver(),
+                        Settings.System.STATUS_BAR_GREETING, "");
+            }
+		}
         return super.onPreferenceTreeClick(preferenceScreen, preference);
+    }
+
+    private void updateCheckState(String value) {
+        if (value == null || TextUtils.isEmpty(value)) mStatusBarGreeting.setChecked(false);
     }
 
     private void updateQuickPulldownSummary(int value) {

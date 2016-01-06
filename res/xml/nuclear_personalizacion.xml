@@ -38,6 +38,16 @@
             android:icon="@drawable/ic_remix_notification"
             android:title="@string/led_title"/>
 
+            <PreferenceScreen
+            android:key="systemuituner"
+            android:title="@string/nuclear_extras_systemuituner"
+            android:layout="@layout/preference_nuclearextra_systemui_tuner" >
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.systemui"
+                android:targetClass="com.android.systemui.tuner.TunerActivity" />
+       </PreferenceScreen>
+
         <!-- Animation Settings 
         <PreferenceScreen
             android:key="animation_settings"

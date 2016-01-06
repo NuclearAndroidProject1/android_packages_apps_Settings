@@ -24,6 +24,12 @@
             android:summary="@string/network_traffic_summary"
             android:title="@string/network_traffic_title" />
 
+        <PreferenceScreen
+	        android:fragment="com.android.settings.nuclear.StatusBarClockStyle"
+    	    android:key="clock_style_pref"
+        	android:title="@string/status_bar_clock"
+	    	android:summary="@string/status_bar_clock_summary" />
+
         <SwitchPreference
             android:key="status_bar_brightness_control"
             android:summary="@string/status_bar_brightness_control_summary"
@@ -58,5 +64,41 @@
             android:entries="@array/quick_pulldown_entries"
             android:entryValues="@array/quick_pulldown_values"
             android:persistent="false" />
+
+            <PreferenceCategory
+            android:title="@string/status_bar_greeting_category_title">
+
+        <SwitchPreference
+                android:key="status_bar_greeting"
+                android:title="@string/status_bar_greeting_title"
+                android:summary="@string/status_bar_greeting_summary"
+                android:defaultValue="true" />
+
+        <com.android.settings.widget.SeekBarPreferenceCham
+                android:key="status_bar_greeting_timeout"
+                android:title="@string/status_bar_greeting_timeout_title"
+                android:max="10000"
+                settings:min="100"
+                settings:unitsLeft=""
+                settings:unitsRight="ms"
+                android:dependency="status_bar_greeting"
+                android:persistent="false" />
+
+    </PreferenceCategory>        
+
+     <PreferenceCategory
+             android:title="@string/status_bar_options_title" />
+<!-- Status bar logo -->
+    <!--<com.android.settings.slim.SystemSettingSwitchPreference-->
+    <com.android.settings.preference.SystemSettingSwitchPreference
+            android:key="status_bar_logo"
+            android:title="@string/status_bar_logo_title"
+            android:summary="@string/status_bar_logo_summary" />
+
+    <com.android.settings.nuclear.cp.ColorPickerPreference
+            android:key="status_bar_logo_color"
+            android:title="@string/status_bar_logo_color"
+            android:defaultValue="0xffffffff"
+            android:dependency="status_bar_logo" />
 
 </PreferenceScreen>
