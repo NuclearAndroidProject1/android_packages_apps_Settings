@@ -4,6 +4,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/misc_category_title" >
-  
+
+    <SwitchPreference
+            android:key="colum_number"
+            android:title="@string/colum_number_title"
+            android:summary="@string/colum_number_summary"
+            android:defaultValue="true"/> 
+
+    <!-- ScreenShot sounds -->
+    <SwitchPreference
+            android:key="screenshot_sounds"
+            android:title="@string/screenshot_sounds_title"
+            android:persistent="false"
+            android:defaultValue="true" />  
 
 </PreferenceScreen>

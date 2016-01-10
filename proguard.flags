@@ -19,6 +19,8 @@
 -keep class com.android.settings.preference.*
 -keep class com.android.settings.darkobas.*
 
+-keep class com.android.settings.nuclear.*Settings
+
 # Keep click responders
 -keepclassmembers class com.android.settings.inputmethod.UserDictionaryAddWordActivity {
   *** onClick*(...);

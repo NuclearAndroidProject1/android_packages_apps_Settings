@@ -22,6 +22,11 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.settings.R;
+import com.android.settings.nuclear.misc.misc;
+import android.provider.Settings;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import android.content.Context;
 
 public class DashboardContainerView extends ViewGroup {
 
@@ -37,7 +42,7 @@ public class DashboardContainerView extends ViewGroup {
         final Resources res = context.getResources();
         mCellGapX = res.getDimension(R.dimen.dashboard_cell_gap_x);
         mCellGapY = res.getDimension(R.dimen.dashboard_cell_gap_y);
-        mNumColumns = res.getInteger(R.integer.dashboard_num_columns);
+        mNumColumns=Settings.System.getInt(context.getContentResolver(), Settings.System.COLUM_NUMBER, 2);
     }
 
     @Override

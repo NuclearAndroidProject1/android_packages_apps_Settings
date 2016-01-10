@@ -35,6 +35,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.Utils;
+import android.util.SettingConfirmationHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,6 +49,19 @@ public class MainSettings extends SettingsPreferenceFragment implements Indexabl
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.nuclear_main_settings);
+
+                 Resources res = getResources();
+ 
+        SettingConfirmationHelper.request(
+            getActivity(),
+            Settings.System.PERFORMANCE_APP,
+            res.getString(R.string.performance_app_title),
+            res.getString(R.string.performance_app_message),
+            res.getString(R.string.kernel_adiutor_title),
+            res.getString(R.string.synapse_title),
+            null,
+            null
+        );
 
     }
     @Override

@@ -65,7 +65,13 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
  
- public class misc extends SettingsPreferenceFragment {
+ public class misc extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
+
+ 	private static final String COLUM_NUMBER = "colum_number";
+    private static final String SCREENSHOT_SOUNDS = "screenshot_sounds";
+ 	
+    private SwitchPreference mColumNumber;
+    private SwitchPreference mScreenshotSounds;
 
 
   @Override
@@ -73,11 +79,42 @@ import com.android.settings.Utils;
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.nuclear_misc);
+        final ContentResolver resolver = getActivity().getContentResolver();
 
+        mColumNumber = (SwitchPreference) findPreference(COLUM_NUMBER);
+        mScreenshotSounds = (SwitchPreference) findPreference(SCREENSHOT_SOUNDS);
     }
 
     @Override
     protected int getMetricsCategory() {
         return MetricsLogger.DONT_TRACK_ME_BRO;
     }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mColumNumber) {
+            if (mColumNumber.isChecked()) {
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.COLUM_NUMBER, 2);
+            }else{
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.COLUM_NUMBER, 1);
+            }
+        }else if (preference == mScreenshotSounds) {
+ 	      if (mScreenshotSounds.isChecked()) {
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SCREENSHOT_SOUNDS, 2);
+            }else{
+                Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.SCREENSHOT_SOUNDS, 1);
+            }
+ 	    }else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+            return false;
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object value) {
+          return true;
+     }
 }

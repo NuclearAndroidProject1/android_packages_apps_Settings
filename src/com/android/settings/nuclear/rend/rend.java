@@ -51,11 +51,26 @@ import java.io.IOException;
 
 public class rend extends SettingsPreferenceFragment{
 
+	private static final String CATEGORY_PERFORMANCE = "performance_category";
+ 
+ 	private static final String KEY_SYNAPSE = "key_synapse";
+ 	private static final String KEY_KERNEL_ADIUTOR = "key_kernel_adiutor";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.nuclear_rend);
+
+        Boolean checkPerformance = Settings.System.getInt(getContentResolver(), Settings.System.PERFORMANCE_APP, 0) == 1;
+
+        if(checkPerformance) {
+           PreferenceScreen synapse = (PreferenceScreen) findPreference(KEY_SYNAPSE);
+           getPreferenceScreen().removePreference(synapse);
+        } else {
+           PreferenceScreen kernelAdiutor = (PreferenceScreen) findPreference(KEY_KERNEL_ADIUTOR);
+           getPreferenceScreen().removePreference(kernelAdiutor);
+        }
 
     }
 
@@ -63,4 +78,37 @@ public class rend extends SettingsPreferenceFragment{
     protected int getMetricsCategory() {
         return MetricsLogger.DONT_TRACK_ME_BRO;
     }
+
+    @Override
+     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+         if (preference.getKey().equals(KEY_SYNAPSE)) {
+             final String appPackageName = "com.af.synapse";
+             try {
+                 getActivity().getPackageManager().getPackageInfo(appPackageName, 0);
+             } catch (PackageManager.NameNotFoundException e) {
+                 try {
+                     getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                 } catch (ActivityNotFoundException ex) {
+                     getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+                 }
+                 return true;
+             }
+             return false;
+         } else if (preference.getKey().equals(KEY_KERNEL_ADIUTOR)) {
+             final String appPackageName = "com.grarak.kerneladiutor";
+             try {
+                 getActivity().getPackageManager().getPackageInfo(appPackageName, 0);
+             } catch (PackageManager.NameNotFoundException e) {
+                 try {
+                     getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                 } catch (ActivityNotFoundException ex) {
+                     getActivity().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appPackageName)));
+                 }
+                 return true;
+
+             }
+             return false;
+         }
+         return super.onPreferenceTreeClick(preferenceScreen, preference);
+     }
 }
