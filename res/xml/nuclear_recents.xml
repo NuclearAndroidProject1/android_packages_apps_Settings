@@ -59,4 +59,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="nrr_slim_recents_panel"
+        android:title="@string/nrr_recent_slim_category" >
+
+        <!-- Slim Recents -->
+        <PreferenceScreen
+           android:key="slim_recents"
+            android:title="@string/slim_recents_panel"
+	    android:fragment="com.android.settings.nuclear.Slimrecents" />
+
+ </PreferenceCategory>
+
 </PreferenceScreen>

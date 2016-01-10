@@ -22,11 +22,13 @@ public class Recents extends SettingsPreferenceFragment
             implements OnPreferenceChangeListener  {
 
 
+    private static final String USE_SLIM_RECENTS = "use_slim_recents";
     private static final String SHOW_CLEAR_ALL_RECENTS = "show_clear_all_recents";
     private static final String RECENTS_CLEAR_ALL_LOCATION = "recents_clear_all_location";
 
     private SwitchPreference mRecentsClearAll;
     private ListPreference mRecentsClearAllLocation;
+    private SwitchPreference mUseSlimRecents;
 
     @Override
     protected int getMetricsCategory() {
@@ -51,6 +53,16 @@ public class Recents extends SettingsPreferenceFragment
         mRecentsClearAllLocation.setValue(String.valueOf(location));
         mRecentsClearAllLocation.setSummary(mRecentsClearAllLocation.getEntry());
         mRecentsClearAllLocation.setOnPreferenceChangeListener(this);
+        boolean slimRecent = Settings.System.getInt(getActivity().getContentResolver(),
+                    Settings.System.USE_SLIM_RECENTS, 0) == 1;
+
+        if (slimRecent) {
+            mRecentsClearAll.setEnabled(false);
+            mRecentsClearAllLocation.setEnabled(false);
+        } else {
+            mRecentsClearAll.setEnabled(true);
+            mRecentsClearAllLocation.setEnabled(true);
+       }
     }
 
     @Override
