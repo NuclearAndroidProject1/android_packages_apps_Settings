@@ -7,7 +7,7 @@
 
                     
         <!-- SuperSU -->
-        <dashboard-tile
+        <PreferenceScreen
                 android:id="@+id/supersu_settings"
                 android:icon="@drawable/ic_settings_supersu_tile"
                 android:title="@string/supersu_title">
@@ -15,6 +15,6 @@
                     android:action="android.intent.action.MAIN"
                     android:targetPackage="eu.chainfire.supersu"
                     android:targetClass="eu.chainfire.supersu.MainActivity" />
-        </dashboard-tile>
+        </PreferenceScreen>
 
 </PreferenceScreen>

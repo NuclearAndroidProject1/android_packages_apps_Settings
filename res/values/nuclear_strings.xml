@@ -197,11 +197,11 @@
     <string name="status_bar_greeting_title">Greeting</string>
     <string name="status_bar_greeting_summary">Display a custom greeting in the status bar after unlocking the device</string>
     <string name="status_bar_greeting_dialog">Set your greeting</string>
-    <string name="status_bar_greeting_main">NuclearSlim ツ</string>
+    <string name="status_bar_greeting_main">NAP ツ</string>
     <string name="status_bar_greeting_timeout_title">Greeting timeout</string>
     <!-- Statusbar logo -->
-    <string name="status_bar_logo_title">Show NuclearSlim logo</string>
-    <string name="status_bar_logo_summary">Enable to show NuclearSlim logo on the left side of statusbar</string>
+    <string name="status_bar_logo_title">Show NuclearTeam logo</string>
+    <string name="status_bar_logo_summary">Enable to show NuclearTeam logo on the left side of statusbar</string>
     <string name="status_bar_logo_color">NS logo color</string>
 
     <string name="battery_title">Battery</string>

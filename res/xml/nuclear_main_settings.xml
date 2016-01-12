@@ -58,7 +58,7 @@
         <PreferenceScreen
                 android:key="misc"
                 android:id="@+id/nuclear_misc_settings"
-                android:icon="@drawable/ic_misc"
+                android:icon="@drawable/ic_nuclear_misc"
                 android:fragment="com.android.settings.nuclear.misc.misc"
                 android:title="@string/misc_category_title">
          </PreferenceScreen>
