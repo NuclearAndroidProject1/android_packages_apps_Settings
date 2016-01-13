@@ -2887,8 +2887,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Diese Berechtigung ermöglicht einer App das Ändern von Systemeinstellungen."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Ja"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Nein"</string>
-    <string name="qtifeedback_settings_title">Hardware-Feedback</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies Berichte</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Zum Öffnen der Kamera zweimal drehen"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Kamera App durch zweimaliges Drehen des Handgelenks öffnen"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Für Kamera Ein/Aus zweimal drücken"</string>

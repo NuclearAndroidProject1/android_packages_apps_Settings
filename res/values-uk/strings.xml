@@ -2920,8 +2920,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Додаток зможе змінювати налаштування системи."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Так"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Ні"</string>
-    <string name="qtifeedback_settings_title">Відгук про обладнання</string>
-    <string name="qtifeedback_settings_subtitle">Надсилання звітів Qualcomm Technologies</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Відкривати Камеру, покрутивши зап’ястям"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Додаток Камера відкриється, якщо двічі покрутити зап’ястям"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Камера: двічі натиснути кнопку живлення"</string>

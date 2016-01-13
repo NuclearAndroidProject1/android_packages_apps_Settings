@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"സിസ്റ്റം ക്രമീകരണം പരിഷ്കരിക്കുന്നതിന് ഒരു ആപ്പിനെ ഈ അനുമതി അനുവദിക്കുന്നു."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"അതെ"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"ഇല്ല"</string>
-    <string name="qtifeedback_settings_title">ഹാർഡ്‌വെയർ ഫീഡ്‌ബാക്ക്</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies റിപ്പോർട്ടുചെയ്യൽ</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"ക്യാമറയ്ക്കായി രണ്ടുതവണ തിരിക്കുക"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"നിങ്ങളുടെ കൈത്തണ്ട രണ്ടുപ്രാവശ്യം തിരിച്ചുകൊണ്ട് ക്യാമറാ ആപ്പ് തുറക്കുക"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ക്യാമറയ്ക്കായി പവർ ബട്ടൺ രണ്ടുതവണ അമർത്തുക"</string>

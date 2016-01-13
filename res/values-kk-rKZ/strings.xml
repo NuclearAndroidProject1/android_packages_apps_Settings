@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Бұл рұқсат қолданбаға жүйелік параметрлерді өзгертуге рұқсат етеді."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Иә"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Жоқ"</string>
-    <string name="qtifeedback_settings_title"> Жабдыққа байланысты пікір</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies хабарламасы</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Камера үшін екі рет бұру"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Білекті екі рет бұру арқылы камера қолданбасын ашу"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Камера үшін қуат түймес. екі рет басыңыз"</string>

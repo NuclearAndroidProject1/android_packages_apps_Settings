@@ -2902,8 +2902,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"To dopuštenje omogućuje aplikaciji izmjenu postavki sustava."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Da"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Ne"</string>
-    <string name="qtifeedback_settings_title">Povratne informacije o hardveru</string>
-    <string name="qtifeedback_settings_subtitle"> Slanje izvještaja tvrtki Qualcomm Technologies</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Dvostruko obrtanje za fotoaparat"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Otvaranje aplikacije fotoaparata obrtanjem ručnog zgloba dvaput"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Pritisnite uključ. dvaput za fotoaparat"</string>

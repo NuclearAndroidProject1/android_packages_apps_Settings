@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Denne tilladelse giver en app lov til at ændre systemindstillinger."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Ja"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Nej"</string>
-    <string name="qtifeedback_settings_title">Hardware-feedback</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies Rapportering</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Drej to gange for at åbne kameraet"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Åbn kameraappen ved at dreje håndleddet to gange"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Tryk to gange på afbryderknappen for at åbne kameraet"</string>

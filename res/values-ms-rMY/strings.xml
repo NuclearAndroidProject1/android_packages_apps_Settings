@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Kebenaran ini membolehkan apl mengubah suai tetapan sistem."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Ya"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Tidak"</string>
-    <string name="qtifeedback_settings_title">Maklum Balas Perkakasan</string>
-    <string name="qtifeedback_settings_subtitle">Pelaporan Qualcomm Technologies</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Pusing dua kali untuk membuka kamera"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Buka apl kamera dengan memusingkan pergelangan tangan anda dua kali"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Tekan butang kuasa dua kali untuk kamera"</string>

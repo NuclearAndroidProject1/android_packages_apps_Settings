@@ -2920,8 +2920,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"To dovoljenje aplikaciji dovoljuje spreminjanje sistemskih nastavitev."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Da"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Ne"</string>
-    <string name="qtifeedback_settings_title">Povratne informacije o strojni opremi</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies Poročilo</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Dvakratno sukanje za fotoaparat"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Odprite aplikacijo za fotografiranje, tako da dvakrat zasukate zapestje"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Dva dotika gumba za vklop za fotoaparat"</string>

@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"এই অনুমতিটি কোনো অ্যাপ্লিকেশানকে সিস্টেম সেটিংস সংশোধন করার অনুমতি দেয়৷"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"হ্যাঁ"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"না"</string>
-    <string name="qtifeedback_settings_title">হার্ডওয়্যার ফিডব্যাক</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies প্রতিবেদন</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"ক্যামেরার জন্য দুবার ঝাঁকান"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"আপনার কব্জি দুবার ঝাঁকিয়ে ক্যামেরা অ্যাপ্লিকেশানটি খুলুন"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"ক্যামেরার জন্য দুবার পাওয়ার বোতাম টিপুন"</string>

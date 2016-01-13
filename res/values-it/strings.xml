@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Questa autorizzazione consente a un\'app di modificare le impostazioni di sistema."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Sì"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"No"</string>
-    <string name="qtifeedback_settings_title">Feedback sull\'hardware</string>
-    <string name="qtifeedback_settings_subtitle">Invio di rapporti a Qualcomm Technologies</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Doppia rotazione per fotocamera"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Apri l\'app Fotocamera ruotando due volte il polso"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Premi due volte tasto di acc. per fotoc."</string>

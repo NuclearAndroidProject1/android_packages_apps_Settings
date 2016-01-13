@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Þessi heimild leyfir forriti að breyta kerfisstillingum."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Já"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Nei"</string>
-    <string name="qtifeedback_settings_title">Svörun vélbúnaðar</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies Skýrslugjöf</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Tvöfaldur snúningur fyrir myndavél"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Opnaðu myndavélarforritið með því að snúa úlnliðnum tvisvar"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Ýttu tvisvar á aflrofann til að opna myndavélina"</string>

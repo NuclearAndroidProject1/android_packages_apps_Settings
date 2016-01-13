@@ -2902,8 +2902,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Ова дозвола дозвољава апликацији да мења подешавања система."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Да"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Не"</string>
-    <string name="qtifeedback_settings_title">Повратне информације о хардверу</string>
-    <string name="qtifeedback_settings_subtitle">Слање извештаја компанији Qualcomm Technologies</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Двапут заокрените за камеру"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Отворите апликацију Камера тако што ћете двапут заокренути ручни зглоб"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Притисните дугме за напајање двапут за камеру"</string>

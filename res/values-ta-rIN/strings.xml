@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"இது முறைமை அமைப்புகளை மாற்ற, பயன்பாட்டை அனுமதிக்கும்."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"அனுமதிக்கப்பட்டது"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"அனுமதிக்கப்படவில்லை"</string>
-    <string name="qtifeedback_settings_title">வன்பொருள் பின்னூட்டம்</string>
-    <string name="qtifeedback_settings_subtitle"> Qualcomm Technologies அறிக்கையிடுதல்</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"கேமராவைத் திறக்க, இருமுறை திருப்புதல்"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"உங்கள் மணிக்கட்டை இருமுறை திருப்புவதன் மூலம் கேமரா பயன்பாட்டைத் திறக்கலாம்"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"கேமராவிற்கு பவர் பட்டனை இருமுறை அழுத்துக"</string>

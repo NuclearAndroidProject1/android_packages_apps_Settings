@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Bu ruxsatnoma ilovaga tizim sozlamalarini o‘zgaritish uchun ruxsat beradi."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Ha"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Yo‘q"</string>
-    <string name="qtifeedback_settings_title">Apparat vositalari javobi</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies Hisobot berish</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Kamera uchun bilakni ikki marta bukish"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Kamera ilovasini ochish uchun bilagingizni ikki marta buking"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Quvvat tugmasini ikki marta bosish bilan kamerani ochish"</string>

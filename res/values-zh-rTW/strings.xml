@@ -2892,8 +2892,6 @@
     <string name="sim_enabler_title">SIM開關</string>
     <string name="lte_4g_settings_title">啟用 4G</string>
     <string name="label_global_roaming_settings">國際漫遊設置</string>
-    <string name="qtifeedback_settings_title">硬體使用情況回報</string>
-    <string name="qtifeedback_settings_subtitle"> Qualcomm Technologies 報告</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"扭兩下即可開啟相機"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"扭動手腕兩次即可開啟「相機」應用程式"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"按兩下電源按鈕即可開啟相機"</string>

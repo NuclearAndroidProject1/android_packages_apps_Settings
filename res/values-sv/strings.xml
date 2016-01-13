@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Med den här behörigheten kan appen ändra systeminställningarna."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Ja"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Nej"</string>
-    <string name="qtifeedback_settings_title">Maskinvara - Feedback</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies Rapportering</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Två handledsvridningar öppnar kameran"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Öppna kameran med två handledsvridningar"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Öppna kameran med två tryck på strömbr."</string>

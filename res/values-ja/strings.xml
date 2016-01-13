@@ -2890,8 +2890,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"この権限により、アプリはシステム設定の変更ができるようになります。"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"可"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"不可"</string>
-    <string name="qtifeedback_settings_title"> ハードウェアに関するフィードバック</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologiesレポート</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"2回ひねる動作でカメラアプリを開く"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"手首を2回ひねる動作でカメラアプリを開きます"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"電源ボタンを2回押してカメラを起動"</string>

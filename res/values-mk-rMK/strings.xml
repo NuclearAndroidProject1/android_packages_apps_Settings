@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Оваа дозвола овозможува апликацијата да менува поставки на системот."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Да"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Не"</string>
-    <string name="qtifeedback_settings_title">Повратни информации за хардверот</string>
-    <string name="qtifeedback_settings_subtitle">Праќање извештаи на компанијата Qualcomm Technologies</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Завртете двапати за камерата"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Завртете го зглобот двапати за да ја отворите апликација за камера"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Прит. копче за напој. двапати за камера"</string>

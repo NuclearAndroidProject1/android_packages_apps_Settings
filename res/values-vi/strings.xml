@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Quyền này cho phép ứng dụng sửa đổi cài đặt hệ thống."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Có"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Không"</string>
-    <string name="qtifeedback_settings_title"> Phản hồi về phần cứng</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies Báo cáo</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Xoắn đúp cho camera"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Mở ứng dụng camera bằng cách vặn cổ tay hai lần"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Nhấn nút nguồn hai lần để mở máy ảnh"</string>

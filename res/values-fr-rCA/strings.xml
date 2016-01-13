@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Cette autorisation permet à une application de modifier les paramètres du système."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Oui"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Non"</string>
-    <string name="qtifeedback_settings_title">Avis sur le matériel</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies Transmission de rapports</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Pivot. poignet deux fois pour app. photo"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Ouvrez l\'application de l\'appareil photo en pivotant votre poignet deux fois"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"App. 2x sur interr. pr activ. app. photo"</string>

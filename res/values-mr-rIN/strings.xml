@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"ही परवानगी अॅपला सिस्टीम सेटिंग्ज सुधारित करण्‍याची अनुमती देते."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"होय"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"नाही"</string>
-    <string name="qtifeedback_settings_title">हार्डवेअर फीडबॅक</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies  रिपोर्टिंग</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"कॅमेर्‍यासाठी दोनदा वळवा"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"आपले मनगट दोनदा वळवून कॅमेरा अॅप उघडा"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"कॅमेर्‍यासाठी उर्जा बटण दोनदा दाबा"</string>

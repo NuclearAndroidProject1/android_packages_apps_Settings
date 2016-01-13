@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"यह अनुमति किसी ऐप को सिस्टम सेटिंग बदलने देती है."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"हां"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"नहीं"</string>
-    <string name="qtifeedback_settings_title"> हार्डवेयर प्रतिसाद</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies रिपोर्टिंग</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"कैमरे के लिए दो बार मोड़ना"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"अपनी कलाई को दो बार मोड़कर कैमरा ऐप खोलें"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"कैमरे के लिए पावर बटन दो बार दबाएं"</string>

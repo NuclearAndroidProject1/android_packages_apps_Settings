@@ -2886,12 +2886,6 @@
     <string name="write_settings_off" msgid="5156104383386336233">"不允许"</string>
 
     <string name="primary_sub_select_title">默认4G/3G SIM卡</string>
-    <string name="data_usage_menu_show_time_range">显示时间区间</string>
-    <string name="data_usage_menu_hide_time_range">隐藏时间区间</string>
-    <string name="app_ops_permiss_name">应用联网限制</string>
-    <string name="storage_menu_cleanup">垃圾清理</string>
-    <string name="qtifeedback_settings_title">硬件反馈</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies 报告</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"扭转两次即可打开相机"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"扭转手腕两次即可打开相机应用"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"按电源按钮两次即可打开相机"</string>

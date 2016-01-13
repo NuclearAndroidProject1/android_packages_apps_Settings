@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Con este permiso unha aplicación pode modificar a configuración do sistema."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Si"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Non"</string>
-    <string name="qtifeedback_settings_title">Comentarios sobre o hardware</string>
-    <string name="qtifeedback_settings_subtitle">Informe de Qualcomm Technologies</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Dobre xiro para abrir a cámara"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Xira o pulso dúas veces para abrir a aplicación da cámara"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Premer botón de acendido dúas veces para abrir a cámara"</string>

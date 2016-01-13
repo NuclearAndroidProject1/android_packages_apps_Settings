@@ -2883,9 +2883,6 @@
     <string name="permit_write_settings" msgid="6393779336656870080">"اجازه دادن به برنامه برای تغییر تنظیمات سیستم"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"این مجوز به برنامه امکان می‌دهد تنظیمات سیستم را تغییر دهد."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"بله"</string>
-    <string name="write_settings_off" msgid="5156104383386336233">"خیر"</string>
-    <string name="qtifeedback_settings_title">اطلاعات سخت‌افزار</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies گزارش</string>
     <string name="write_settings_off" msgid="5156104383386336233">"نه"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"دو بار بچرخانید تا دوربین باز شود"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"با دو بار چرخاندن مچتان، برنامه دوربین را باز کنید"</string>

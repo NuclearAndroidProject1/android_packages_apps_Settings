@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"ఈ అనుమతి సిస్టమ్ సెట్టింగ్‌లను సవరించడానికి అనువర్తనాన్ని అనుమతిస్తుంది."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"అవును"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"లేదు"</string>
-    <string name="qtifeedback_settings_title">హార్డ్‌వేర్ అభిప్రాయం</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies నివేదించడం</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"కెమెరా కోసం రెండు సార్లు తిప్పడం"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"మీ ఫోన్ పట్టుకున్న ముంజేతిని రెండు సార్లు తిప్పితే కెమెరా అనువర్తనం తెరవబడుతుంది"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"కెమెరాకై పవర్ బటన్ రెండుసార్లు నొక్కండి"</string>
