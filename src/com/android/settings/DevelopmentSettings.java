@@ -173,8 +173,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
-   // private static final String KEY_NIGHT_MODE = "night_mode";
-
     private static final int RESULT_DEBUG_APP = 1000;
     private static final int RESULT_MOCK_LOCATION_APP = 1001;
 
@@ -256,8 +254,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private SwitchPreference mShowAllANRs;
 
-    //private DropDownPreference mNightModePreference;
-
     private ColorModePreference mColorModePreference;
     private SwitchPreference mAdvancedReboot;
 
@@ -293,7 +289,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         if (android.os.Process.myUserHandle().getIdentifier() != UserHandle.USER_OWNER
-                || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)) {
+                || mUm.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)
+                || Settings.Global.getInt(getActivity().getContentResolver(),
+                        Settings.Global.DEVICE_PROVISIONED, 0) == 0) {
+            // Block access to developer options if the user is not the owner, if user policy
+            // restricts it, or if the device has not been provisioned
             mUnavailable = true;
             setPreferenceScreen(new PreferenceScreen(getActivity(), null));
             return;
@@ -415,27 +415,6 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             mAllPrefs.add(hdcpChecking);
             removePreferenceForProduction(hdcpChecking);
         }
-
-/*        mNightModePreference = (DropDownPreference) findPreference(KEY_NIGHT_MODE);
-        final UiModeManager uiManager = (UiModeManager) getSystemService(
-                Context.UI_MODE_SERVICE);
-        final int currentNightMode = uiManager.getNightMode();
-        mNightModePreference.setSelectedValue(String.valueOf(currentNightMode));
-        mNightModePreference.setCallback(new DropDownPreference.Callback() {
-            @Override
-            public boolean onItemSelected(int pos, Object newValue) {
-                try {
-                    final int value = Integer.parseInt((String) newValue);
-                    final UiModeManager uiManager = (UiModeManager) getSystemService(
-                            Context.UI_MODE_SERVICE);
-                    uiManager.setNightMode(value);
-                    return true;
-                } catch (NumberFormatException e) {
-                    Log.e(TAG, "could not persist night mode setting", e);
-                    return false;
-                }
-            }
-        });*/
 
         // make sure we dont leave an unremovable bugreport in power menu
         final ContentResolver cr = getActivity().getContentResolver();

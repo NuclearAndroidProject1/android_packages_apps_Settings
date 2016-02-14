@@ -18,31 +18,51 @@ package com.android.settings.dashboard;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.UserHandle;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.settings.R;
-import com.android.settings.nuclear.misc.misc;
-import android.provider.Settings;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import android.content.Context;
+
 
 public class DashboardContainerView extends ViewGroup {
 
+    public static final String PREF_DASHBOARD_COLUMNS = "dashboard_columns";
     private float mCellGapX;
     private float mCellGapY;
 
     private int mNumRows;
     private int mNumColumns;
+    private boolean mCompactMode;
+    public static int mDashboardValue;
 
     public DashboardContainerView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         final Resources res = context.getResources();
-        mCellGapX = res.getDimension(R.dimen.dashboard_cell_gap_x);
+        mCellGapX = res.getDimension(mCompactMode ? R.dimen.dashboard_cell_gap_x_compact : R.dimen.dashboard_cell_gap_x);
         mCellGapY = res.getDimension(R.dimen.dashboard_cell_gap_y);
-        mNumColumns=Settings.System.getInt(context.getContentResolver(), Settings.System.COLUM_NUMBER, 2);
+        mDashboardValue = res.getInteger(R.integer.dashboard_num_columns);
+
+        boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
+        int dashboardColumns = isPrimary ? getDashboardNumColumns() : mDashboardValue;
+
+        if (dashboardColumns == 1) {
+            mNumColumns = 1;
+        }
+        if (dashboardColumns == 2) {
+            mNumColumns = 2;
+        }
+        if (dashboardColumns == 3) {
+            mNumColumns = 3;
+        }
+    }
+
+    private int getDashboardNumColumns() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.DASHBOARD_COLUMNS, mDashboardValue);
     }
 
     @Override
@@ -143,5 +163,9 @@ public class DashboardContainerView extends ViewGroup {
                 y += childHeight + mCellGapY;
             }
         }
+    }
+
+    protected boolean isCompactMode() {
+        return mCompactMode;
     }
 }

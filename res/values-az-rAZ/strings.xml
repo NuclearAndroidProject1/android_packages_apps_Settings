@@ -2884,8 +2884,6 @@
     <string name="write_settings_description" msgid="6868293938839954623">"Bu icazə tətbiqə sistem ayarlarını dəyişdirməyə imkan verir."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Bəli"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Xeyr"</string>
-    <string name="qtifeedback_settings_title"> Avadanlığa dair sorğu</string>
-    <string name="qtifeedback_settings_subtitle">Qualcomm Technologies üçün hesabat</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Kamera üçün iki dəfə burun"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Biləyinizi iki dəfə buraraq kamera tətbiqini açın"</string>
     <string name="camera_double_tap_power_gesture_title" msgid="1651873760405034645">"Kamera üçün yandırıb söndürmə düyməsinə iki dəfə basın"</string>

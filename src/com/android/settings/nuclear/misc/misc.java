@@ -26,6 +26,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -39,6 +40,7 @@ import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
@@ -64,14 +66,18 @@ import android.preference.SwitchPreference;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.internal.util.omni.DeviceUtils;
+import com.android.settings.dashboard.DashboardContainerView;
  
  public class misc extends SettingsPreferenceFragment implements OnPreferenceChangeListener {
 
- 	private static final String COLUM_NUMBER = "colum_number";
     private static final String SCREENSHOT_SOUNDS = "screenshot_sounds";
+
+    private static final String DASHBOARD_COLUMNS = "dashboard_columns";
  	
-    private SwitchPreference mColumNumber;
     private SwitchPreference mScreenshotSounds;
+    private ListPreference mDashboardColumns;
+
 
 
   @Override
@@ -79,10 +85,18 @@ import com.android.settings.Utils;
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.nuclear_misc);
+        mContext = getActivity().getApplicationContext();
+        PreferenceScreen prefSet = getPreferenceScreen();
         final ContentResolver resolver = getActivity().getContentResolver();
 
-        mColumNumber = (SwitchPreference) findPreference(COLUM_NUMBER);
         mScreenshotSounds = (SwitchPreference) findPreference(SCREENSHOT_SOUNDS);
+
+        mDashboardColumns = (ListPreference) findPreference(DASHBOARD_COLUMNS);
+        mDashboardColumns.setValue(String.valueOf(Settings.System.getInt(
+                getContentResolver(), Settings.System.DASHBOARD_COLUMNS, DashboardContainerView.mDashboardValue)));
+        mDashboardColumns.setSummary(mDashboardColumns.getEntry());
+        mDashboardColumns.setOnPreferenceChangeListener(this);
+
     }
 
     @Override
@@ -92,15 +106,7 @@ import com.android.settings.Utils;
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mColumNumber) {
-            if (mColumNumber.isChecked()) {
-                Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.COLUM_NUMBER, 2);
-            }else{
-                Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.COLUM_NUMBER, 1);
-            }
-        }else if (preference == mScreenshotSounds) {
+		if (preference == mScreenshotSounds) {
  	      if (mScreenshotSounds.isChecked()) {
                 Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SCREENSHOT_SOUNDS, 2);
@@ -108,6 +114,8 @@ import com.android.settings.Utils;
                 Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.SCREENSHOT_SOUNDS, 1);
             }
+
+        
  	    }else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
@@ -115,6 +123,13 @@ import com.android.settings.Utils;
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
+        if (preference == mDashboardColumns) {
+            Settings.System.putInt(getContentResolver(), Settings.System.DASHBOARD_COLUMNS,
+                    Integer.valueOf((String) value));
+            mDashboardColumns.setValue(String.valueOf(value));
+            mDashboardColumns.setSummary(mDashboardColumns.getEntry());
+            return true;
+        }
           return true;
      }
 }

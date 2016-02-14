@@ -655,7 +655,7 @@
         
              android:name=".nuclear.segapp.segapp" />
 
-<!-- rendimiento -->
+    <!-- rendimiento -->
         <activity android:name="Settings$rend"
              android:label="@string/nuclear_cat_title"
              android:taskAffinity="">
@@ -688,7 +688,7 @@
              android:name=".nuclear.misc.misc" />
 
         <!--Gesture AnyWhere-->
-         <activity android:name=".nuclear.gestureanywhere.GestureAnywhereBuilderActivity" />
+        <activity android:name=".nuclear.gestureanywhere.GestureAnywhereBuilderActivity" />
         <activity android:name=".nuclear.gestureanywhere.GestureAnywhereCreateGestureActivity" />
 
         <activity android:name="Settings$KeyboardLayoutPickerActivity"
@@ -2583,6 +2583,7 @@
 
         <activity android:name="Settings$SimSettingsActivity"
                 android:label="@string/sim_settings_title"
+                android:configChanges="mcc|mnc"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.sim.SIM_SUB_INFO_SETTINGS" />
@@ -2686,6 +2687,5 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.WriteSettingsDetails" />
         </activity>
-
     </application>
 </manifest>

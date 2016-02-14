@@ -27,6 +27,19 @@
         android:summary="@string/powermenu_lockscreen_summary"
         android:defaultValue="true" />
 
+    <com.android.settings.preference.SystemSettingSwitchPreference
+        android:key="lockscreen_see_through"
+        android:title="@string/lockscreen_see_through_title"
+        android:summary="@string/lockscreen_see_through_summary"
+        android:defaultValue="false" />
+
+    <com.android.settings.preference.SeekBarPreference
+        android:key="lockscreen_blur_radius"
+        android:title="@string/lockscreen_blur_radius"
+        android:dependency="lockscreen_see_through"
+        android:max="25"
+        settings:defaultValue="14" />
+
     <PreferenceScreen
         android:key="lock_screen_weather_settings"
         android:title="@string/lock_screen_weather_settings_title"

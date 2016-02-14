@@ -75,7 +75,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
     private PreferenceScreen mConfigure;
     private boolean mEnabled;
 
-	private final HashMap<String, String> mResettablePrefs = new HashMap<String, String>();
+    private final HashMap<String, String> mResettablePrefs = new HashMap<String, String>();
 
     @Override
     protected int getMetricsCategory() {
@@ -191,7 +191,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         setConfigureSummary(configSummary);
     }
 
-   private void showResetList() {
+    private void showResetList() {
         updateResetUserPreferences();
         if (mResettablePrefs.size() == 0) {
             return;

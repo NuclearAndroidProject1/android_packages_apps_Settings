@@ -18,7 +18,6 @@
     <dimen name="color_preference_height_large">32dip</dimen>
     <dimen name="color_preference_end">20dip</dimen>
 
-
     <!-- Gesture Anywhere -->
     <dimen name="ga_gesture_thumbnail_inset">8dip</dimen>
     <dimen name="ga_gesture_thumbnail_size">64dip</dimen>

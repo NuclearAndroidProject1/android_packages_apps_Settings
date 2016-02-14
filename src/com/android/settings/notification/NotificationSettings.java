@@ -30,7 +30,6 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.media.AudioManager;
-import android.media.AudioSystem;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -46,7 +45,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.SeekBarVolumizer;
 import android.preference.TwoStatePreference;
-import android.preference.SwitchPreference;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.SearchIndexableResource;
@@ -147,19 +145,17 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
         addPreferencesFromResource(R.xml.notification_settings);
 
         final PreferenceCategory sound = (PreferenceCategory) findPreference(KEY_SOUND);
-
         initVolumePreference(KEY_MEDIA_VOLUME, AudioManager.STREAM_MUSIC,
                 com.android.internal.R.drawable.ic_audio_media_mute);
         initVolumePreference(KEY_ALARM_VOLUME, AudioManager.STREAM_ALARM,
                 com.android.internal.R.drawable.ic_audio_alarm_mute);
-
         if (mVoiceCapable) {
             mRingOrNotificationPreference =
                     initVolumePreference(KEY_RING_VOLUME, AudioManager.STREAM_RING,
                             com.android.internal.R.drawable.ic_audio_ring_notif_mute);
             sound.removePreference(sound.findPreference(KEY_NOTIFICATION_VOLUME));
         } else {
-           mRingOrNotificationPreference =
+            mRingOrNotificationPreference =
                     initVolumePreference(KEY_NOTIFICATION_VOLUME, AudioManager.STREAM_NOTIFICATION,
                             com.android.internal.R.drawable.ic_audio_ring_notif_mute);
             sound.removePreference(sound.findPreference(KEY_RING_VOLUME));
@@ -227,8 +223,8 @@ public class NotificationSettings extends SettingsPreferenceFragment implements 
                 : mRingerMode == AudioManager.RINGER_MODE_VIBRATE || wasRingerModeVibrate()
                 ? com.android.internal.R.drawable.ic_audio_ring_notif_vibrate
                 : com.android.internal.R.drawable.ic_audio_ring_notif);
-	}
-    
+    }
+
     private boolean wasRingerModeVibrate() {
         return mVibrator != null && mRingerMode == AudioManager.RINGER_MODE_SILENT
                 && mAudioManager.getLastAudibleStreamVolume(AudioManager.STREAM_RING) == 0;

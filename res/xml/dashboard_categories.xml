@@ -72,7 +72,7 @@
 
     </dashboard-category>
 
-        <!-- PERSONALIZATION -->
+    <!-- PERSONALIZATION -->
     <dashboard-category
             android:id="@+id/personalization_section"
             android:title="@string/header_category_personalization" >
@@ -83,6 +83,17 @@
                 android:fragment="com.android.settings.nuclear.MainSettings"
                 android:icon="@drawable/ic_nuclear"
                 />  
+                
+        <!-- SuperSU -->
+        <dashboard-tile
+                android:id="@+id/supersu_settings"
+                android:icon="@drawable/ic_settings_supersu_tile"
+                android:title="@string/supersu_title">
+                <intent
+                    android:action="android.intent.action.MAIN"
+                    android:targetPackage="eu.chainfire.supersu"
+                    android:targetClass="eu.chainfire.supersu.MainActivity" />
+        </dashboard-tile>
 
         <!-- Layers -->
         <dashboard-tile
@@ -241,7 +252,7 @@
         android:key="@string/category_key_system"
         android:title="@string/header_category_system" >
 
-    <!-- Date & Time -->
+        <!-- Date & Time -->
         <dashboard-tile
                 android:id="@+id/date_time_settings"
                 android:title="@string/date_and_time_settings_title"

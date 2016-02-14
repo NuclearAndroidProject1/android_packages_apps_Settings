@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2013-2015 Slimroms
+<!--  Copyright (C) 2013 The OmniROM Project
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+<!-- Copyright (C) 2012 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,7 +28,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
@@ -75,9 +89,9 @@
             android:summary="@string/navigation_bar_show_summary"
             android:persistent="false" />
 
-        <SeekBarPreference
-            android:key="navigation_bar_height"
-            android:title="@string/navigation_bar_height"
+	    <SeekBarPreference
+	        android:key="navigation_bar_height"
+	        android:title="@string/navigation_bar_height"
                 android:max="100"
                 android:defaultValue="100" />
 
@@ -113,7 +127,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-       android:key="button_keys_back"
+        android:key="button_keys_back"
         android:title="@string/button_keys_back_title" >
 
         <ListPreference
@@ -262,4 +276,3 @@
     </PreferenceCategory>
 -->
 </PreferenceScreen>
-

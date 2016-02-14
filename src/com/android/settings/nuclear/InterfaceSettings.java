@@ -24,6 +24,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.app.UiModeManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.AsyncTask;
@@ -35,6 +36,7 @@ import android.provider.Settings;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.view.Display;
@@ -56,6 +58,7 @@ import com.android.settings.DropDownPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import android.provider.Settings.SettingNotFoundException;
+import com.android.internal.util.omni.DeviceUtils;
 import com.android.internal.logging.MetricsLogger;
 
 public class InterfaceSettings extends SettingsPreferenceFragment implements
@@ -138,6 +141,7 @@ public class InterfaceSettings extends SettingsPreferenceFragment implements
                 }
             }
         });
+        
 
     }
 
