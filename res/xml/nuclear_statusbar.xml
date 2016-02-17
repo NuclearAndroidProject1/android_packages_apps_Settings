@@ -52,6 +52,12 @@
             android:title="@string/daylight_header_pack_title"
             android:persistent="false" />
 
+		<com.android.settings.preference.SystemCheckBoxPreference
+            android:title="@string/show_operator_name_title"
+            android:key="show_operator_name"
+            android:summary="@string/show_operator_name_summary"
+            android:defaultValue="false" />
+
         <com.android.settings.preference.SystemSettingSwitchPreference
             android:key="double_tap_sleep_gesture"
             android:title="@string/double_tap_to_sleep_title"

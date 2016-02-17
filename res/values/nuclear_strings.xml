@@ -858,4 +858,17 @@
     <string name="show_fourg_title">Show 4G instead of LTE</string>
     <string name="show_fourg_summary">Replaces LTE statusbar indicator with 4G</string>
     <string name="statusbar_tuner_category_title">Hide items from statusbar</string>
+
+    <string name="show_operator_name_title">Show operator name</string>
+    <string name="show_operator_name_summary">Show operator name in status bar</string>
+
+    <!-- Volume Keys Media Control -->
+    <string name="volume_keys_control_media_stream">Media control</string>
+    <string name="volume_keys_control_media_stream_summary">Volume keys control media volume rather than notifications</string>
+
+    <!-- Volume rocker music seek options -->
+    <string name="volume_music_controls_title">Volume rocker music controls</string>
+    <string name="volume_music_controls_summary">When screen off, long-pressing the volume rockers will seek music tracks</string>
+    <string name="volume_button_toggle_info">Volume rocker wake must be disabled</string>
+
 </resources>

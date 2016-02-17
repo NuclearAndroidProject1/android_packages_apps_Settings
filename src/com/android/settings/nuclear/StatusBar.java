@@ -56,6 +56,7 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
     private static final String KEY_STATUS_BAR_GREETING = "status_bar_greeting";
     private static final String KEY_STATUS_BAR_GREETING_TIMEOUT = "status_bar_greeting_timeout";
     private static final String KEY_LOGO_COLOR = "status_bar_logo_color";
+    private static final String SHOW_OPERATOR_NAME = "show_operator_name";
 
     private SwitchPreference mStatusBarBrightnessControl;
     private ListPreference mDaylightHeaderPack;
@@ -64,6 +65,7 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
     private SwitchPreference mStatusBarGreeting;
     private SeekBarPreferenceCham mStatusBarGreetingTimeout;
     private ColorPickerPreference mLogoColor;
+    private CheckBoxPreference mShowOperatorName;
 
     private String mCustomGreetingText = "";
 
@@ -92,6 +94,11 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
         ContentResolver resolver = getActivity().getContentResolver();
         PreferenceScreen prefSet = getPreferenceScreen();
 
+        mShowOperatorName = (CheckBoxPreference) findPreference(SHOW_OPERATOR_NAME);
+        mShowOperatorName.setOnPreferenceChangeListener(this);
+        boolean showOperatorName = Settings.System.getInt(getContentResolver(), SHOW_OPERATOR_NAME, 0) == 1;
+        mShowOperatorName.setChecked(showOperatorName);
+
 		mQuickPulldown = (ListPreference) findPreference(PRE_QUICK_PULLDOWN);
         if (!Utils.isPhone(getActivity())) {
             prefSet.removePreference(mQuickPulldown);
@@ -116,8 +123,11 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
             settingHeaderPackage = DEFAULT_HEADER_PACKAGE;
         }
         mDaylightHeaderPack = (ListPreference) findPreference(DAYLIGHT_HEADER_PACK);
-        mDaylightHeaderPack.setEntries(getAvailableHeaderPacksEntries());
-        mDaylightHeaderPack.setEntryValues(getAvailableHeaderPacksValues());
+        List<String> entries = new ArrayList<String>();
+        List<String> values = new ArrayList<String>();
+        getAvailableHeaderPacks(entries, values);
+        mDaylightHeaderPack.setEntries(entries.toArray(new String[entries.size()]));
+        mDaylightHeaderPack.setEntryValues(values.toArray(new String[values.size()]));
 
         int valueIndex = mDaylightHeaderPack.findIndexOfValue(settingHeaderPackage);
         if (valueIndex == -1) {
@@ -204,6 +214,11 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
             Settings.System.putInt(getContentResolver(),
                     Settings.System.STATUS_BAR_LOGO_COLOR, intHex);
             return true;  
+        } else if (preference == mShowOperatorName) {
+            boolean value = (Boolean) objValue;
+            Settings.System.putInt(getContentResolver(), SHOW_OPERATOR_NAME,
+                    value ? 1 : 0);
+            return true;
         } else if (preference == mDaylightHeaderPack) {
             String value = (String) objValue;
             Settings.System.putString(getContentResolver(),
@@ -278,40 +293,39 @@ public class StatusBar extends SettingsPreferenceFragment implements Preference.
         }
     }
 
-        private String[] getAvailableHeaderPacksValues() {
-        List<String> headerPacks = new ArrayList<String>();
+        private void getAvailableHeaderPacks(List<String> entries, List<String> values) {
         Intent i = new Intent();
         PackageManager packageManager = getPackageManager();
         i.setAction("org.omnirom.DaylightHeaderPack");
         for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
             String packageName = r.activityInfo.packageName;
             if (packageName.equals(DEFAULT_HEADER_PACKAGE)) {
-                headerPacks.add(0, packageName);
+                values.add(0, packageName);
             } else {
-                headerPacks.add(packageName);
+                values.add(packageName);
             }
-        }
-        return headerPacks.toArray(new String[headerPacks.size()]);
-    }
-
-    private String[] getAvailableHeaderPacksEntries() {
-        List<String> headerPacks = new ArrayList<String>();
-        Intent i = new Intent();
-        PackageManager packageManager = getPackageManager();
-        i.setAction("org.omnirom.DaylightHeaderPack");
-        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
-            String packageName = r.activityInfo.packageName;
+        
             String label = r.activityInfo.loadLabel(getPackageManager()).toString();
             if (label == null) {
                 label = r.activityInfo.packageName;
             }
             if (packageName.equals(DEFAULT_HEADER_PACKAGE)) {
-                headerPacks.add(0, label);
+                entries.add(0, label);
             } else {
-                headerPacks.add(label);
+                entries.add(label);
             }
         }
-        return headerPacks.toArray(new String[headerPacks.size()]);
+        i.setAction("org.omnirom.DaylightHeaderPack1");
+        for (ResolveInfo r : packageManager.queryIntentActivities(i, 0)) {
+            String packageName = r.activityInfo.packageName;
+            values.add(packageName  + "/" + r.activityInfo.name);
+
+            String label = r.activityInfo.loadLabel(getPackageManager()).toString();
+            if (label == null) {
+                label = packageName;
+            }
+            entries.add(label);
+        }
     }
 
 
