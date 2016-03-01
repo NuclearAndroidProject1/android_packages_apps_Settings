@@ -26,6 +26,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -35,6 +37,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.MetricsLogger;
@@ -42,6 +45,7 @@ import com.android.settings.HelpUtils;
 import com.android.settings.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.widget.SwitchBar;
 
 import java.util.List;
 
@@ -159,7 +163,8 @@ public class DashboardSummary extends InstrumentedFragment {
 
                 DashboardTileView tileView = new DashboardTileView(context, compactMode);
                 updateTileView(context, res, tile, tileView.getImageView(),
-                        tileView.getTitleTextView(), tileView.getStatusTextView());
+                        tileView.getTitleTextView(), tileView.getStatusTextView(),
+                        tileView.getSwitchView());
 
                 tileView.setTile(tile);
 
@@ -173,8 +178,8 @@ public class DashboardSummary extends InstrumentedFragment {
         Log.d(LOG_TAG, "rebuildUI took: " + delta + " ms");
     }
 
-    private void updateTileView(Context context, Resources res, DashboardTile tile,
-            ImageView tileIcon, TextView tileTextView, TextView statusTextView) {
+    public void updateTileView(Context context, Resources res, DashboardTile tile,
+            ImageView tileIcon, TextView tileTextView, TextView statusTextView, Switch switchBar) {
 
         if (!TextUtils.isEmpty(tile.iconPkg)) {
             try {
@@ -213,6 +218,25 @@ public class DashboardSummary extends InstrumentedFragment {
         } else {
             statusTextView.setVisibility(View.GONE);
         }
+
+        if (tile.switchControl != null) {
+        	 boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
+        int dashboardSwitches = isPrimary ? getDashboardSwitches(context) : 0;
+
+        if (dashboardSwitches == 0) {
+            switchBar.setVisibility(View.GONE);
+        }
+        if (dashboardSwitches == 1) {
+            switchBar.setVisibility(View.VISIBLE);
+        }
+        } else {
+            // beans answer your fucking hangouts
+        }
+    }
+
+    private static int getDashboardSwitches(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.DASHBOARD_SWITCHES, 0);
     }
 
     private void sendRebuildUI() {

@@ -74,10 +74,11 @@ import com.android.settings.dashboard.DashboardContainerView;
     private static final String SCREENSHOT_SOUNDS = "screenshot_sounds";
 
     private static final String DASHBOARD_COLUMNS = "dashboard_columns";
+    private static final String DASHBOARD_SWITCHES = "dashboard_switches";
  	
     private SwitchPreference mScreenshotSounds;
     private ListPreference mDashboardColumns;
-
+	private ListPreference mDashboardSwitches;
 
 
   @Override
@@ -96,6 +97,12 @@ import com.android.settings.dashboard.DashboardContainerView;
                 getContentResolver(), Settings.System.DASHBOARD_COLUMNS, DashboardContainerView.mDashboardValue)));
         mDashboardColumns.setSummary(mDashboardColumns.getEntry());
         mDashboardColumns.setOnPreferenceChangeListener(this);
+
+        mDashboardSwitches = (ListPreference) findPreference(DASHBOARD_SWITCHES);
+        mDashboardSwitches.setValue(String.valueOf(Settings.System.getInt(
+                getContentResolver(), Settings.System.DASHBOARD_SWITCHES, 0)));
+        mDashboardSwitches.setSummary(mDashboardSwitches.getEntry());
+        mDashboardSwitches.setOnPreferenceChangeListener(this);
 
     }
 
@@ -128,6 +135,13 @@ import com.android.settings.dashboard.DashboardContainerView;
                     Integer.valueOf((String) value));
             mDashboardColumns.setValue(String.valueOf(value));
             mDashboardColumns.setSummary(mDashboardColumns.getEntry());
+            return true;
+        }
+        if (preference == mDashboardSwitches) {
+            Settings.System.putInt(getContentResolver(), Settings.System.DASHBOARD_SWITCHES,
+                    Integer.valueOf((String) value));
+            mDashboardSwitches.setValue(String.valueOf(value));
+            mDashboardSwitches.setSummary(mDashboardSwitches.getEntry());
             return true;
         }
           return true;

@@ -540,4 +540,15 @@
     <string name="global_actions_title">Power menu</string>
     <string name="global_actions_summary">Actions shown in power menu</string>
     <string name="global_actions_header">Some actions are only visible depending on the setup or only if the device is unlocked</string>
+
+    <!-- Optional Dashboard Switches -->
+    <string-array name="dashboard_switches_entries">
+        <item>@string/dashboard_switches_off</item>
+        <item>@string/dashboard_switches_on</item>
+    </string-array>
+
+    <string-array name="dashboard_switches_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
