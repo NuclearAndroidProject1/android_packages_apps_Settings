@@ -592,6 +592,22 @@
                 android:resource="@id/application_settings" />
         </activity>
 
+
+        <activity android:name="Settings$NuclearTweaksActivity"
+            android:label="@string/custom_title"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.nuclear.nucleartweaks.NuclearTweaks" />
+        </activity>
+
+
+
+
+
         <!-- Nuclear Settings -->
         <activity android:name="Settings$MainSettingsActivity"
              android:label="@string/nuclear_settings_title"

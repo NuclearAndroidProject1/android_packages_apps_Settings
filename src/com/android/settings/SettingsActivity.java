@@ -126,6 +126,7 @@ import com.android.settings.wifi.WifiSettings;
 import com.android.settings.wifi.p2p.WifiP2pSettings;
 
 import com.android.settings.nuclear.MainSettings;
+import com.nuclear.nucleartweaks.NuclearTweaks;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -281,6 +282,7 @@ public class SettingsActivity extends Activity
             R.id.nfc_payment_settings,
             R.id.home_settings,
             R.id.main_settings,
+            R.id.nucleartweaks,
             R.id.dashboard
     };
 
@@ -357,7 +359,8 @@ public class SettingsActivity extends Activity
             ProcessStatsSummary.class.getName(),
             DrawOverlayDetails.class.getName(),
             WriteSettingsDetails.class.getName(),
-            MainSettings.class.getName()
+            MainSettings.class.getName(),
+            NuclearTweaks.class.getName()
     };
 
 

@@ -92,6 +92,15 @@
     <dashboard-category
             android:id="@+id/personalization_section"
             android:title="@string/header_category_personalization" >
+
+        <!-- Nuclear Tweaks -->
+        <dashboard-tile
+                android:id="@+id/nucleartweaks"
+                android:title="@string/custom_title"
+                android:fragment="com.nuclear.nucleartweaks.NuclearTweaks"
+                android:icon="@drawable/ic_nuclear"
+                />
+
         <!-- NuclearMod-->
         <dashboard-tile
                 android:id="@+id/main_settings"

@@ -18,6 +18,7 @@
 -keep class com.android.settings.notification.*
 -keep class com.android.settings.preference.*
 -keep class com.android.settings.nuclear.*
+-keep class com.nuclear.nucleartweaks.**
 
 # These would be stripped out since they are being created with reflection
 -keep class com.android.settings.dashboard.GenericSwitchToggle { *; }

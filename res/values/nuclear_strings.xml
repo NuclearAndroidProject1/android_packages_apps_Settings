@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+<!-- Customization -->
+    <string name="header_category_custom">Customization</string>
+    <string name="custom_title">Nuclear Tweaks</string>
+
+
+
+
+
+
+
+
+
+
+
    <!-- <string name="remix_settings_title">Remix Settings</string>
     <string name="remix_lights_category">Lights Settings</string>
     <string name="remix_device_category">Device Settings</string>
